@@ -8,19 +8,21 @@
         <script src="scripts/lib/jquery.cookie.js"></script>
 		<script src="kendo/js/kendo.mobile.min.js"></script>
 		<script src="scripts/main.js"></script>
+        <script src="scripts/util.js"></script>
+        <script src="scripts/constants.js"></script>
 
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
 	</head>
 	<body>
 
-		<div data-role="view" id="login" data-layout="login-layout" data-title="Rig Services">
+		<div data-role="view" id="login" data-layout="login-layout" data-title="Rig Services" data-init="onLoginInit">
 			<br/><br/>
 			<div class="form maximal"  id="login-form">
 				<input class="custom-input center" type="text" placeholder="Username" id="username"  /><br/>
 				<input class="custom-input center" type="password" placeholder="Password" id="password" /><br/>
 				<div style="vertical-align: middle;height: 2.2em; text-align: left" class="center">
-					<input type="checkbox" style="display:inline-block;" /><span>Remember me</span>
+					<input type="checkbox" style="display:inline-block;" checked="checked" id="remember-me"/><span>Remember me</span>
 					<a style="float:right;" data-click="login" data-role="button">Sign in</a>
 				</div>
 			</div>

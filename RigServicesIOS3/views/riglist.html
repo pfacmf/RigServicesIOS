@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<div data-role="view" id="riglist" data-title="Rig List" data-layout="" data-show="onRigListShow" >
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title">Rig List</span>
+				</div>
+			</header>
+
+			<br/>
+			<div style="width:100%; text-align:center">
+				<a data-role="button" class="bigbutton" href="views/editrig.html">New Rig</a>
+			</div>
+			<ul id="rig-list-view" data-role="listview" data-style="inset" data-template="rig-list-template" data-click="onRigListClick">
+			</ul>
+			<script id="rig-list-template" type="text/x-kendo-template">
+				#: name #
+			</script>
+
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#login" data-icon="home">Logout</a>
+				</div>
+			</div>
+		</div>
+
+		<script src="scripts/riglist.js"></script>
+	</body>
+</html>

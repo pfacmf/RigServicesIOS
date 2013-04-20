@@ -13,12 +13,22 @@ function onDeviceReady() {
 	//navigator.splashscreen.hide();
 }
 
+function onLoginInit() {
+	var username = getPersistent('rememberMeUsername');
+	var password = getPersistent('rememberMePassword');
+	if (username && password) {
+		$("#username").val(username);
+		$("#password").val(password);
+	}
+}
 
 var App = (function () { 
 	var _app = undefined; 
-    var _initialData = undefined;
+	var _initialData = undefined;
+	var _rig = undefined;
+	var _category = undefined;
     
-    return { 
+	return { 
 		getApp: function () { 
 			return _app; 
 		}, 
@@ -26,18 +36,34 @@ var App = (function () {
 			_app = app; 
 			return this; 
 		},
-        getInitialData: function(){
-            return _initialData;
-        },
-        setInitialData: function(initialData){
-            _initialData = initialData;
-        }
+		getInitialData: function() {
+			return _initialData;
+		},
+		setInitialData: function(initialData) {
+			_initialData = initialData;
+		},
+		setRig: function(rig) {
+			_rig = rig;
+		},
+		getRig: function() {
+			return _rig;
+		},
+		setCategory:function(category) {
+			_category = category;
+		},
+		getCategory:function() {
+			return _category;
+		}
 	}; 
 }());
 
 function login() {
 	var username = $("#username").val().trim();
 	var password = $("#password").val().trim();
+	if (! $("#remember-me").is(':checked')) {
+		deletePersistent('rememberMeUsername');
+		deletePersistent('rememberMePassword');
+	}
 	if (username.length == 0) {
 		alert("Please provide an username");
 		$("#username").focus();
@@ -49,61 +75,83 @@ function login() {
 		return;
 	}
     
-    var url = getNormalizedURL(getURL());
-    url += 'mainServiceProxy?';
-    url += $.param({action: 'login', username: username, password: password});
-    $.get(url, onLoginDone).fail(onLoginFail);
+	var url = getURL();
+	url += 'mainServiceProxy?';
+	url += $.param({action: 'login', username: username, password: password});
+	$.get(url, onLoginDone).fail(onRequestFail);
 }
 
-function onLoginDone(data, status){
-    if (status == 'success'){
-        if (data.indexOf('Error:') == 0){
-            alert(data);
-        } else {
-            App.setInitialData($.parseJSON(data));
-            alert(App.getInitialData().currentUser.lightUser.firstName);
-        }
-    } else {
-        alert('Error logging in');
-    }
+function getRequestData(data, status) {
+	if (status == 'success') {
+		if (data.indexOf('Error:') == 0) {
+			alert(data);
+		}
+		else {
+			return $.parseJSON(data);
+		}   
+	}
+	else {
+		alert('Error during request');
+	}
+	return null;
 }
 
-function onLoginFail(jqxhr, textStatus, error){
-    alert('Error loging in:\n' + error);
+function onLoginDone(data, status) {
+	var initialData = getRequestData(data, status);
+	if (initialData) {
+		App.setInitialData(initialData);
+		var username = $("#username").val().trim();
+		var password = $("#password").val().trim()
+		if ($("#remember-me").is(':checked')) {
+			savePersistent('rememberMeUsername', username);
+			savePersistent('rememberMePassword', password);
+		}
+		saveSession('username', username);
+		saveSession('password', password);
+		App.getApp().navigate('views/riglist.html');
+	}
 }
 
-function saveSettings(){
-    var url = $("#url").val().trim();
-    if (url.length == 0){
-        alert('url is mandatory');
-        return;
-    }
-    if (typeof(Storage) !== undefined){
-        localStorage.url = url;
-    } else {
-        $.cookie("url", rul, {expires: 3650});
-    }
-    App.getApp().navigate("#login");
+function onRequestFail(jqxhr, textStatus, error) {
+	alert('Error making the request:\n' + error);
 }
 
-function onSettingsInit(){
-    $("#url").val(getURL());
+function saveSettings() {
+	var url = $("#url").val().trim();
+	if (url.length == 0) {
+		alert('url is mandatory');
+		return;
+	}
+	savePersistent('url', url);
+	App.getApp().navigate("#login");
 }
 
-function getURL(){
-    if (localStorage && localStorage.url){
-        return localStorage.url;
-    }
-    if ($.cookie("url")){
-        return $.cookie("url");
-    }
-    return "http://192.168.0.90/";
+function onSettingsInit() {
+	$("#url").val(getURL());
 }
 
-function getNormalizedURL(url){
-    if (!url.lastIndexOf('/') == url.length-1){
-        return url + '/';
-    } else {
-        return url;
-    }
+function getURL() {
+	var url = getPersistent('url');
+	if (url) {
+		if (!url.lastIndexOf('/') == url.length - 1) {
+			return url + '/';
+		}
+		return url;
+	}
+	else {
+		return "http://192.168.0.90:8888/";
+	}
+}
+
+function getRequestURL(action) {
+	var url = getURL();
+	var params = {
+		username: getSession('username'),
+		password: getSession('password')
+	}
+
+	if (action) {
+		params.action = action;
+	}
+	return url + "mainServiceProxy?" + $.param(params);
 }

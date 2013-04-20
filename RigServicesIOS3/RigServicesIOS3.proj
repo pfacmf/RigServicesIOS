@@ -82,9 +82,18 @@
     <Content Include="kendo\styles\images\KendoUI.ttf" />
     <Content Include="kendo\styles\images\KendoUI.woff" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="scripts\categorieslist.js" />
+    <Content Include="scripts\constants.js" />
+    <Content Include="scripts\riglist.js" />
+    <Content Include="scripts\rigtabs.js" />
+    <Content Include="scripts\util.js" />
     <Content Include="scripts\lib\jquery.cookie.js" />
     <Content Include="scripts\main.js" />
     <Content Include="styles\main.css" />
+    <Content Include="views\categorieslist.html" />
+    <Content Include="views\editrig.html" />
+    <Content Include="views\riglist.html" />
+    <Content Include="views\rigtabs.html" />
     <Content Include="views\settings.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+    </head>
+    <body>
+		<div data-role="view" id="categories-list" data-show="onCategoriesListShow" data-layout="" data-init="onCategoriesListInit" >
+			<header data-role="header" >
+				<div data-role="navbar" id="categories-navbar"> 
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+
+			<ul id="categories-list-view" data-role="listview" data-style="inset" data-click="onCategoriesListClick">
+			</ul>
+
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="#login" data-icon="home">Logout</a>
+					<a href="views/riglist.html" data-icon="reply">Back</a>
+				</div>
+			</div>
+            
+            <script src="scripts/categorieslist.js"></script>
+		</div>        
+    </body>
+</html>

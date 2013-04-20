@@ -32,6 +32,15 @@
     <Folder Include="App_Resources\Android\drawable-nodpi">
       <Platform>Android</Platform>
     </Folder>
+    <Folder Include="kendo\js" />
+    <Folder Include="kendo\styles" />
+    <Folder Include="kendo\styles\images" />
+    <Folder Include="scripts\lib" />
+    <Folder Include="styles" />
+    <Folder Include="views" />
+    <Folder Include="scripts" />
+    <Folder Include="images" />
+    <Folder Include="kendo" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App_Resources\iOS\icon.png" />
@@ -57,15 +66,6 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
-    <Content Include="kendo\js\jquery.min.js" />
-    <Content Include="kendo\js\kendo.mobile.min.js" />
-    <Content Include="kendo\styles\images\back.png" />
-    <Content Include="kendo\styles\images\KendoUI.ttf" />
-    <Content Include="kendo\styles\images\KendoUI.woff" />
-    <Content Include="kendo\styles\kendo.mobile.all.min.css" />
-    <Content Include="scripts\hello-world.js" />
-    <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>
       <TargetName>cordova.js</TargetName>
@@ -74,6 +74,18 @@
       <Platform>Android</Platform>
       <TargetName>cordova.js</TargetName>
     </Content>
+    <Content Include="images\login_back.jpg" />
+    <Content Include="index.html" />
+    <Content Include="kendo\js\jquery.min.js" />
+    <Content Include="kendo\js\kendo.mobile.min.js" />
+    <Content Include="kendo\styles\images\back.png" />
+    <Content Include="kendo\styles\images\KendoUI.ttf" />
+    <Content Include="kendo\styles\images\KendoUI.woff" />
+    <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="scripts\lib\jquery.cookie.js" />
+    <Content Include="scripts\main.js" />
+    <Content Include="styles\main.css" />
+    <Content Include="views\settings.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

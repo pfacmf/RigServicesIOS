@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<div data-role="view" id="settings" data-init="onSettingsInit" data-layout="login-layout" data-title="Edit Settings">
+			<br/><br/>
+
+			<ul class="maximal" data-role="listview" data-style="inset" id="editsettings" >
+				<li>
+					<p>Online application</p>
+					<p class="subtitle">
+						(it should end with /)
+					</p>
+					<input type="text" placeholder="url" id="url"  />
+				</li>
+				<li style="text-align:center">
+					<label></label>
+					<a data-click="saveSettings" data-role="button">Save</a>
+				</li>
+			</ul>
+
+			<style>
+				#editsettings p
+				{
+					margin: 0px !important;
+				}
+				.subtitle
+				{
+					font-size: 0.812em;
+					color: #506D93;
+					margin-bottom: 10px !important;
+				}
+				
+				#editsettings input
+				{
+					position: relative !important;
+                    padding-left: 0px !important;
+                    font-size: 0.812em !important;
+                    color: #000000 !important;
+                    width: 100% !important;
+				}
+			</style>
+		</div>
+	</body>
+</html>

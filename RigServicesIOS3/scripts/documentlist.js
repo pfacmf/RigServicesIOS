@@ -50,3 +50,14 @@ function onDeleteDocumentSuccess() {
     onDocumentListShow(documentType, documentListSelector);
     alert("Document was deleted");
 }
+
+function onDocumentTypeChange(){
+    alert($("#document-type").val());
+}
+
+function onEditDocumentShow(e){
+    if (! e.view.params.documentId){
+        //new document
+        $("#document-type").val("Link");
+    }
+}

@@ -5,7 +5,13 @@
 		<title></title>
 	</head>
 	<body>
-		<div data-role="view" id="settings" data-init="onSettingsInit" data-layout="login-layout" data-title="Edit Settings">
+		<div data-role="view" id="settings" data-init="onSettingsInit" data-title="Edit Settings">
+			<header data-role="header">
+				<div data-role="navbar">
+					<a data-role="button" data-align="left" onclick="onBackClick('#login')" data-icon="reply"></a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
 			<br/><br/>
 
 			<ul class="maximal" data-role="listview" data-style="inset" id="editsettings" >
@@ -37,10 +43,10 @@
 				#editsettings input
 				{
 					position: relative !important;
-                    padding-left: 0px !important;
-                    font-size: 0.812em !important;
-                    color: #000000 !important;
-                    width: 100% !important;
+					padding-left: 0px !important;
+					font-size: 0.812em !important;
+					color: #000000 !important;
+					width: 100% !important;
 				}
 			</style>
 		</div>

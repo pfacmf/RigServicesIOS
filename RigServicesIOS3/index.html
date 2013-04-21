@@ -16,7 +16,13 @@
 	</head>
 	<body>
 
-		<div data-role="view" id="login" data-layout="login-layout" data-title="Rig Services" data-show="onLoginShow">
+		<div data-role="view" id="login" data-title="Rig Services" data-show="onLoginShow">
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title"></span>
+                    <a data-role="button" href="views/settings.html" data-icon="settings" data-align="right"></a>
+				</div>
+			</header>
 			<br/><br/>
 			<div class="form maximal"  id="login-form">
 				<input class="custom-input center" type="text" placeholder="Username" id="username"  /><br/>
@@ -46,7 +52,9 @@
 		<div data-role="layout" data-id="rigtabs-layout">
 			<header data-role="header" >
 				<div data-role="navbar" id="rig-tabs-navbar">
+					<a data-role="button" data-align="left" onclick="onBackClick('views/categorieslist.html')" data-icon="reply"></a>
 					<span data-role="view-title"></span>
+					<a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
 				</div>
 			</header>
 
@@ -57,7 +65,6 @@
 					<a href="views/workorderlist.html" data-icon="bookmarks">Work Order</a>
 					<a href="views/maintenancelist.html" data-icon="recents">Maintenance</a>
 					<a href="views/crewlist.html" id="crew-tab-strip" data-icon="contacts">Crew</a>
-					<a href="#login" data-icon="home">Home</a>
 				</div>
 			</div>
 		</div>
@@ -89,8 +96,8 @@
 				#}#
                 
 				#if (hasPhone && email && email.length > 0) {#
-				- 
-                #}#
+					- 
+				#}#
 				
 				#if (email && email.length > 0) {#
 					#: email #
@@ -99,7 +106,7 @@
 		</script>
 
 		<script>
-			App.setApp(new kendo.mobile.Application(document.body, { transition: "slide", layout: "login-layout", initial: "login" }));
+			App.setApp(new kendo.mobile.Application(document.body, { transition: "slide", initial: "login" }));
 		</script>
 	</body>
 </html>

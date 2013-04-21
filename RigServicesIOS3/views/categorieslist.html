@@ -8,19 +8,14 @@
 		<div data-role="view" id="categories-list" data-show="onCategoriesListShow" data-layout="" data-init="onCategoriesListInit" >
 			<header data-role="header" >
 				<div data-role="navbar" id="categories-navbar"> 
+                    <a data-role="button" data-align="left" onclick="onBackClick('views/riglist.html')" data-icon="reply"></a>
 					<span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
 				</div>
 			</header>
 
 			<ul  class="maximal" id="categories-list-view" data-role="listview" data-style="inset" data-click="onCategoriesListClick">
 			</ul>
-
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#login" data-icon="home">Logout</a>
-					<a href="views/riglist.html" data-icon="reply">Back</a>
-				</div>
-			</div>
             
             <script src="scripts/categorieslist.js"></script>
 		</div>        

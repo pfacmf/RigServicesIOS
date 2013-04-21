@@ -8,7 +8,9 @@
 		<div data-role="view" id="editrig" data-title="New Rig" data-layout="" data-show="onEditRigShow">
 			<header data-role="header">
 				<div data-role="navbar">
+                    <a data-role="button" data-align="left" onclick="onBackClick('views/riglist.html')" data-icon="reply"></a>
 					<span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
 				</div>
 			</header>
 
@@ -22,12 +24,6 @@
             </ul>
             <div style="width:100%; text-align:center">
 				<a data-role="button" class="bigbutton" data-click="saveRig">Save</a>
-			</div>
-			<div data-role="footer">
-				<div data-role="tabstrip">
-					<a href="#login" data-icon="home">Logout</a>
-					<a href="views/riglist.html" data-icon="reply">Cancel</a>
-				</div>
 			</div>
 		</div>
         <script src="scripts/riginfo.js"></script>

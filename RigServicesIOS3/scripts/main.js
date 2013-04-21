@@ -191,3 +191,13 @@ function setRigTabsTitle() {
 		return;
 	}
 }
+
+function onLogoutClick(){
+    if (confirm("Are you sure you want to logout?")){
+        App.getApp().navigate("#login");
+    }
+}
+
+function onBackClick(navigateTo){
+    App.getApp().navigate(navigateTo);
+}

@@ -8,7 +8,9 @@
 		<div data-role="view" id="riglist" data-title="Rig List" data-layout="" data-show="onRigListShow" >
 			<header data-role="header">
 				<div data-role="navbar">
-					<span data-role="view-title">Rig List</span>
+                    <a data-role="button" data-align="left" data-click="onLogoutClick" data-icon="reply"></a>
+					<span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
 				</div>
 			</header>
 
@@ -22,11 +24,13 @@
 				#: name #
 			</script>
 
+            <!--
 			<div data-role="footer">
 				<div data-role="tabstrip">
 					<a href="#login" data-icon="home">Logout</a>
 				</div>
 			</div>
+            -->
 		</div>
 
 		<script src="scripts/riglist.js"></script>

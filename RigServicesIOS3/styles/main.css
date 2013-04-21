@@ -65,3 +65,7 @@ body
 	color: #506D93;
 	margin: 0px !important;
 }
+
+.listviewinput {
+    width: 70% !important;
+}

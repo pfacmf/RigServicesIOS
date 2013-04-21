@@ -27,3 +27,25 @@ function onGetRigInfoSuccess(data, status) {
 		$("#riginfo-html").html(info.description);
 	}
 }
+
+function saveRig(){
+    var rigName = $("#rig-name").val().trim();
+    if (rigName.length == 0){
+        alert("Rig name is mandatory");
+        return;
+    }
+    var rigInfo = $("#rig-info").val().trim();
+    var url = getRequestURL('saverig');
+    url += "&" + $.param({rigname:rigName, riginfo: rigInfo});
+    $.get(url, onSaveRigSuccess).fail(onRequestFail);
+}
+
+function onSaveRigSuccess(){
+    App.getApp().navigate("views/riglist.html");
+    alert("Rig was saved");
+}
+
+function onEditRigShow(){
+    $("#rig-name").val('');
+    $("#rig-info").val('');
+}

@@ -32,6 +32,19 @@
 					<a style="float:right;" data-click="login" data-role="button">Sign in</a>
 				</div>
 			</div>
+            
+            <!-- the action sheet for the options menu it has to be inside a view -->
+			<ul data-role="actionsheet" id="document-menu">
+				<li>
+					<a data-action="openDocument">Download</a>
+				</li>
+				<li>
+					<a data-action="editDocument">Edit</a>
+				</li>
+				<li>
+					<a data-action="deleteDocument">Delete</a>
+				</li>
+			</ul>
 		</div>
 
 		<div data-role="layout" data-id="login-layout">
@@ -59,7 +72,7 @@
 			</header>
 
 			<div data-role="footer">
-				<div data-role="tabstrip">
+				<div data-role="tabstrip" id="application-tabstrip">
 					<a href="views/riginfo.html" data-icon="info">Info</a>
 					<a href="views/drawingslist.html" data-icon="camera">Drawings</a>
 					<a href="views/workorderlist.html" data-icon="bookmarks">Work Order</a>

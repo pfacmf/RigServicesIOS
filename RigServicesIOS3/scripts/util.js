@@ -43,3 +43,35 @@ function getSession(key) {
 	}
 	return null;
 }
+
+function getFormattedDateTime(d) {
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth();
+	curr_month++;
+	var curr_year = d.getFullYear();
+    
+	var hour = d.getHours() % 12;
+	var min = d.getMinutes();
+	var sec = d.getSeconds();
+	var meridian = 'AM';
+	if (d.getHours() >= 12)
+		meridian = 'PM';
+    
+	return curr_month + "/" + curr_date + "/" + curr_year + " " + hour + ":" + min + ":" + sec + ":" + " " + meridian;
+}
+
+function getFormattedDate(dateParam) {
+    var d;
+    if (typeof dateParam === "Date"){
+        d = dateParam;
+    } else {
+        d = new Date(dateParam);
+    }
+    
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth();
+	curr_month++;
+	var curr_year = d.getFullYear();
+    
+	return curr_month + "/" + curr_date + "/" + curr_year;
+}

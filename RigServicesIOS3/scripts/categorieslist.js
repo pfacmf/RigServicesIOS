@@ -14,5 +14,5 @@ function onCategoriesListShow(){
 
 function onCategoriesListClick(e){
     App.setCategory(e.item.text());
-    App.getApp().navigate('views/rigtabs.html');
+    App.getApp().navigate('views/riginfo.html');
 }

@@ -84,17 +84,26 @@
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
     <Content Include="scripts\categorieslist.js" />
     <Content Include="scripts\constants.js" />
+    <Content Include="scripts\crewlist.js" />
+    <Content Include="scripts\documentlist.js" />
+    <Content Include="scripts\maintenancelist.js" />
     <Content Include="scripts\riglist.js" />
-    <Content Include="scripts\rigtabs.js" />
+    <Content Include="scripts\riginfo.js" />
     <Content Include="scripts\util.js" />
     <Content Include="scripts\lib\jquery.cookie.js" />
     <Content Include="scripts\main.js" />
     <Content Include="styles\main.css" />
     <Content Include="views\categorieslist.html" />
+    <Content Include="views\crewlist.html" />
+    <Content Include="views\drawingslist.html" />
+    <Content Include="views\editdocument.html" />
+    <Content Include="views\editmaintenance.html" />
     <Content Include="views\editrig.html" />
+    <Content Include="views\maintenancelist.html" />
     <Content Include="views\riglist.html" />
-    <Content Include="views\rigtabs.html" />
+    <Content Include="views\riginfo.html" />
     <Content Include="views\settings.html" />
+    <Content Include="views\workorderlist.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>

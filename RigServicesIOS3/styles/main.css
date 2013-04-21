@@ -32,10 +32,10 @@ body
 
 .bigbutton
 {
-    margin-left:auto;
-    margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	width: 12.5em;
-    font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 #login .km-content
@@ -53,4 +53,15 @@ body
 	max-width: 34em;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.row1
+{
+	margin: 0px !important;
+}
+.row2
+{
+	font-size: 0.812em;
+	color: #506D93;
+	margin: 0px !important;
 }

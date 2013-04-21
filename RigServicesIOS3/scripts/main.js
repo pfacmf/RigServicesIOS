@@ -13,7 +13,11 @@ function onDeviceReady() {
 	//navigator.splashscreen.hide();
 }
 
-function onLoginInit() {
+function onLoginShow() {
+	App.setInitialData(undefined);
+	App.setRig(undefined);
+	App.setCategory(undefined);
+    
 	var username = getPersistent('rememberMeUsername');
 	var password = getPersistent('rememberMePassword');
 	if (username && password) {
@@ -87,7 +91,12 @@ function getRequestData(data, status) {
 			alert(data);
 		}
 		else {
-			return $.parseJSON(data);
+			try {
+				return $.parseJSON(data);
+			}
+			catch (err) {
+				alert(err);
+			}
 		}   
 	}
 	else {
@@ -153,5 +162,32 @@ function getRequestURL(action) {
 	if (action) {
 		params.action = action;
 	}
+	if (App.getRig()) {
+		params.id = App.getRig().id;
+	}
+	if (App.getCategory()) {
+		params.itemmodel = App.getCategory();
+	}
 	return url + "mainServiceProxy?" + $.param(params);
+}
+
+function setRigTabsTitle() {
+	var title = '';
+	if (App.getRig()) {
+		title = App.getRig().name;
+	}
+	else {
+		alert('Rig is unselected. Please select a rig');
+		App.getApp().navigate('views/riglist.html');
+		return;
+	}
+	if (App.getCategory) {
+		title += " / " + App.getCategory();
+		$("#rig-tabs-navbar").data("kendoMobileNavBar").title(title);
+	}
+	else {
+		alert('Category was not selected. Please select a category');
+		App.getApp().navigate('view/categorieslist.html');
+		return;
+	}
 }

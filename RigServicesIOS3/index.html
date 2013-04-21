@@ -5,18 +5,18 @@
 		<meta charset="utf-8" />
 		<script src="cordova.js"></script>
 		<script src="kendo/js/jquery.min.js"></script>
-        <script src="scripts/lib/jquery.cookie.js"></script>
+		<script src="scripts/lib/jquery.cookie.js"></script>
 		<script src="kendo/js/kendo.mobile.min.js"></script>
 		<script src="scripts/main.js"></script>
-        <script src="scripts/util.js"></script>
-        <script src="scripts/constants.js"></script>
+		<script src="scripts/util.js"></script>
+		<script src="scripts/constants.js"></script>
 
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
 	</head>
 	<body>
 
-		<div data-role="view" id="login" data-layout="login-layout" data-title="Rig Services" data-init="onLoginInit">
+		<div data-role="view" id="login" data-layout="login-layout" data-title="Rig Services" data-show="onLoginShow">
 			<br/><br/>
 			<div class="form maximal"  id="login-form">
 				<input class="custom-input center" type="text" placeholder="Username" id="username"  /><br/>
@@ -42,6 +42,61 @@
 				</div>
 			</div>
 		</div>
+
+		<div data-role="layout" data-id="rigtabs-layout">
+			<header data-role="header" >
+				<div data-role="navbar" id="rig-tabs-navbar">
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+
+			<div data-role="footer">
+				<div data-role="tabstrip">
+					<a href="views/riginfo.html" data-icon="info">Info</a>
+					<a href="views/drawingslist.html" data-icon="camera">Drawings</a>
+					<a href="views/workorderlist.html" data-icon="bookmarks">Work Order</a>
+					<a href="views/maintenancelist.html" data-icon="recents">Maintenance</a>
+					<a href="views/crewlist.html" id="crew-tab-strip" data-icon="contacts">Crew</a>
+					<a href="#login" data-icon="home">Home</a>
+				</div>
+			</div>
+		</div>
+
+		<script id="document-template" type="text/x-kendo-template">
+			<p class="row1">#: name #</p>
+			<p class="row2">#: info #</p>
+		</script>
+
+		<script id="maintenance-template" type="text/x-kendo-template">
+			<p class="row1">#: performedBy #</p>
+			<p class="row2">#= getFormattedDate(activityAt) # #if (performingCompanyName && performingCompanyName.length > 0) {
+				# - #: performingCompanyName #
+			#}#</p>
+		</script>
+
+		<script id="crew-template" type="text/x-kendo-template">
+			<p class="row1">
+				#if (title && title.length > 0) {#
+					#: title # - 
+				#}#
+				#: firstName # #:lastName #
+			</p>
+			<p class="row2">
+				#var hasPhone = false;
+				if (telephone && telephone.length > 0) {
+					var hasPhone = true; #    
+					#: telephone #
+				#}#
+                
+				#if (hasPhone && email && email.length > 0) {#
+				- 
+                #}#
+				
+				#if (email && email.length > 0) {#
+					#: email #
+				#}#
+			</p>
+		</script>
 
 		<script>
 			App.setApp(new kendo.mobile.Application(document.body, { transition: "slide", layout: "login-layout", initial: "login" }));

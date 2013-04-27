@@ -179,6 +179,7 @@ function onRequestFail(jqxhr, textStatus, error) {
 	if (!App.isLoaderCanceled()) {
 		alertBox('Error making the request: ' + error);
 	}
+    hideLoader();
 }
 
 function saveSettings() {
@@ -205,6 +206,7 @@ function getURL() {
 	}
 	else {
 		return "http://192.168.0.90:8888/";
+        
 	}
 }
 

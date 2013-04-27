@@ -50,14 +50,15 @@ function getFormattedDateTime(d) {
 	curr_month++;
 	var curr_year = d.getFullYear();
     
-	var hour = d.getHours() % 12;
+	var hour = d.getHours() /*% 12*/;
 	var min = d.getMinutes();
 	var sec = d.getSeconds();
+    /*
 	var meridian = 'AM';
 	if (d.getHours() >= 12)
 		meridian = 'PM';
-    
-	return curr_month + "/" + curr_date + "/" + curr_year + " " + hour + ":" + min + ":" + sec + ":" + " " + meridian;
+    */
+	return curr_month + "/" + curr_date + "/" + curr_year + " " + hour + ":" + min + ":" + sec/* + " " + meridian*/;
 }
 
 function getFormattedDate(dateParam) {

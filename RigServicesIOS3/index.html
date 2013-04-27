@@ -10,7 +10,7 @@
 		<script src="scripts/main.js"></script>
 		<script src="scripts/util.js"></script>
 		<script src="scripts/constants.js"></script>
-        <script src="scripts/documentlist.js"></script>
+		<script src="scripts/documentlist.js"></script>
 
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
@@ -44,6 +44,26 @@
 				</li>
 				<li>
 					<a data-action="deleteDocument">Delete</a>
+				</li>
+			</ul>
+
+			<!-- the action sheet for the options menu it has to be inside a view -->
+			<ul data-role="actionsheet" id="maintenance-menu">
+				<li>
+					<a data-action="editMaintenance">Edit</a>
+				</li>
+				<li>
+					<a data-action="deleteMaintenance">Delete</a>
+				</li>
+			</ul>
+
+			<!-- the action sheet for the options menu it has to be inside a view -->
+			<ul data-role="actionsheet" id="crew-menu">
+				<li>
+					<a data-action="editCrew">Edit</a>
+				</li>
+				<li>
+					<a data-action="deleteCrew">Delete</a>
 				</li>
 			</ul>
 		</div>
@@ -136,7 +156,7 @@
 
 			<a id="alert-ok" data-click="clickAlertButton" type="button" data-role="button">OK</a>
 		</div>
-        
+
 		<div id="glass" class="glass" style="display: none;"></div>
 		<script>
 			App.setApp(new kendo.mobile.Application(document.body, { transition: "slide", initial: "login" }));

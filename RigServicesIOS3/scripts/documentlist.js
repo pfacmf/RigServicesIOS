@@ -14,10 +14,14 @@ function onDocumentListShow(type, listSelector) {
 	documentListSelector = listSelector; 
 	var url = getRequestURL('documentlist');
 	url += "&" + $.param({type:type});
-	$.get(url, onGetDocumentListSuccess).fail(onRequestFail);
+	showLoader("Fetching documents list", $.get(url, onGetDocumentListSuccess).fail(onRequestFail));
 }
 
 function onGetDocumentListSuccess(data, status) {
+	if (App.isLoaderCanceled()) {
+		return;
+	}
+    hideLoader();
 	var docList = getRequestData(data, status);
 	if (docList) {
 		$(documentListSelector).data("kendoMobileListView").setDataSource(new kendo.data.DataSource({data:docList}));
@@ -26,12 +30,12 @@ function onGetDocumentListSuccess(data, status) {
 
 function onDrawingsClick(e) {
 	documentListSelector = '#drawings-list-view';
-    documentType = 'Drawings';
+	documentType = 'Drawings';
 	onDocumentClick(e);
 }
 function onWorkOrderClick(e) {
 	documentListSelector = '#work-order-list-view';
-    documentType = 'Work Order';
+	documentType = 'Work Order';
 	onDocumentClick(e);
 }
 function onDocumentClick(e) {
@@ -42,22 +46,26 @@ function deleteDocument(e) {
 	if (confirm("Are you sure you want to delete the document?")) {
 		var url = getRequestURL('deletedocument');
 		url += "&" + $.param({documentId: e.context});
-		$.get(url, onDeleteDocumentSuccess).fail(onRequestFail);
+		showLoader("Deleting document", $.get(url, onDeleteDocumentSuccess).fail(onRequestFail));
 	}
 }
 
 function onDeleteDocumentSuccess() {
-    onDocumentListShow(documentType, documentListSelector);
-    alert("Document was deleted");
+	if (App.isLoaderCanceled()) {
+		return;
+	}
+    hideLoader();
+	onDocumentListShow(documentType, documentListSelector);
+	alert("Document was deleted");
 }
 
-function onDocumentTypeChange(){
-    alert($("#document-type").val());
+function onDocumentTypeChange() {
+	alert($("#document-type").val());
 }
 
-function onEditDocumentShow(e){
-    if (! e.view.params.documentId){
-        //new document
-        $("#document-type").val("Link");
-    }
+function onEditDocumentShow(e) {
+	if (! e.view.params.documentId) {
+		//new document
+		$("#document-type").val("Link");
+	}
 }

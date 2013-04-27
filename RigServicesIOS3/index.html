@@ -20,7 +20,7 @@
 			<header data-role="header">
 				<div data-role="navbar">
 					<span data-role="view-title"></span>
-                    <a data-role="button" href="views/settings.html" data-icon="settings" data-align="right"></a>
+					<a data-role="button" href="views/settings.html" data-icon="settings" data-align="right"></a>
 				</div>
 			</header>
 			<br/><br/>
@@ -32,8 +32,8 @@
 					<a style="float:right;" data-click="login" data-role="button">Sign in</a>
 				</div>
 			</div>
-            
-            <!-- the action sheet for the options menu it has to be inside a view -->
+
+			<!-- the action sheet for the options menu it has to be inside a view -->
 			<ul data-role="actionsheet" id="document-menu">
 				<li>
 					<a data-action="openDocument">Download</a>
@@ -117,9 +117,12 @@
 				#}#
 			</p>
 		</script>
+		<a id="loading-cancel" data-role="button" onclick="cancelLoader()">Cancel</a>
 
+		<div id="glass" class="glass" style="display: none;"></div>
 		<script>
 			App.setApp(new kendo.mobile.Application(document.body, { transition: "slide", initial: "login" }));
+			$("#loading-cancel").kendoMobileButton();
 		</script>
 	</body>
 </html>

@@ -10,7 +10,44 @@ String.prototype.trim = function() {
 // PhoneGap is ready
 function onDeviceReady() {
 	//getLocation();
-	//navigator.splashscreen.hide();
+	navigator.splashscreen.hide();
+    
+	//add cancel button to kendo loader
+	var loaderElement = $('[data-role="loader"]');
+	var cancelButtonIOS = $("#loading-cancel");
+	loaderElement.append(cancelButtonIOS);
+	loaderElement.css("text-align", "center");
+}
+
+function showLoader(text, request, callback) {
+    $("#glass").show();
+	loaderElement = App.getApp().pane.loader.element.find("h1");
+	if (text) {
+		loaderElement.text(text);
+	}
+	else {
+		loaderElement.text('');
+	}
+    App.setLoaderCanceled(false);
+	App.setLoaderCancelCallback(callback);
+	App.setRequest(request);
+	App.getApp().showLoading();
+	
+}
+
+function cancelLoader() {
+	App.setLoaderCanceled(true);
+    if (App.getLoaderCancelCallback()) {
+		App.loaderCancelCallback();
+	}
+	if (App.getRequest()) {
+		App.getRequest().abort();
+	}
+	hideLoader();
+}
+function hideLoader() {
+    $("#glass").hide();
+	App.getApp().hideLoading();    
 }
 
 function onLoginShow() {
@@ -31,7 +68,9 @@ var App = (function () {
 	var _initialData = undefined;
 	var _rig = undefined;
 	var _category = undefined;
-    
+	var _loaderCancelCallback = undefined;
+	var _loaderCanceled = false;
+	var _request = undefined;
 	return { 
 		getApp: function () { 
 			return _app; 
@@ -57,6 +96,18 @@ var App = (function () {
 		},
 		getCategory:function() {
 			return _category;
+		}, setLoaderCancelCallback: function(callback) {
+			_loaderCancelCallback = callback;
+		}, getLoaderCancelCallback: function() {
+			return _loaderCancelCallback;
+		}, setLoaderCanceled: function(canceled) {
+			_loaderCanceled = canceled;
+		}, isLoaderCanceled:function() {
+			return _loaderCanceled;
+		}, setRequest: function(request) {
+			_request = request;
+		}, getRequest: function() {
+			return _request;
 		}
 	}; 
 }());
@@ -82,7 +133,7 @@ function login() {
 	var url = getURL();
 	url += 'mainServiceProxy?';
 	url += $.param({action: 'login', username: username, password: password});
-	$.get(url, onLoginDone).fail(onRequestFail);
+	showLoader("Logging in...", $.get(url, onLoginDone).fail(onRequestFail));
 }
 
 function getRequestData(data, status) {
@@ -106,6 +157,10 @@ function getRequestData(data, status) {
 }
 
 function onLoginDone(data, status) {
+    if (App.isLoaderCanceled()){
+        return;
+    }
+    hideLoader();
 	var initialData = getRequestData(data, status);
 	if (initialData) {
 		App.setInitialData(initialData);
@@ -122,7 +177,9 @@ function onLoginDone(data, status) {
 }
 
 function onRequestFail(jqxhr, textStatus, error) {
-	alert('Error making the request:\n' + error);
+	if (!App.isLoaderCanceled()) {
+		alert('Error making the request:\n' + error);
+	}
 }
 
 function saveSettings() {
@@ -192,12 +249,12 @@ function setRigTabsTitle() {
 	}
 }
 
-function onLogoutClick(){
-    if (confirm("Are you sure you want to logout?")){
-        App.getApp().navigate("#login");
-    }
+function onLogoutClick() {
+	if (confirm("Are you sure you want to logout?")) {
+		App.getApp().navigate("#login");
+	}
 }
 
-function onBackClick(navigateTo){
-    App.getApp().navigate(navigateTo);
+function onBackClick(navigateTo) {
+	App.getApp().navigate(navigateTo);
 }

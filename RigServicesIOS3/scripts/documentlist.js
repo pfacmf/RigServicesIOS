@@ -1,5 +1,6 @@
 var documentListSelector;
 var documentType;
+var documentId = -1;
 
 function onDrawingsListShow() {
 	onDocumentListShow("Drawings", "#drawings-list-view");
@@ -50,6 +51,16 @@ function deleteDocument(e) {
 	}
 }
 
+function editDocument(e){
+    documentId = e.context;
+    if ($("#drawings-list").length == 1 && App.getApp().view() == $("#drawings-list").data("kendoMobileView")){
+        documentType = 'Drawings';
+    } else {
+        documentType = 'Work Order';
+    }
+    App.getApp().navigate("views/editdocument.html");
+}
+
 function onDeleteDocumentSuccess() {
 	if (App.isLoaderCanceled()) {
 		return;
@@ -60,12 +71,49 @@ function onDeleteDocumentSuccess() {
 }
 
 function onDocumentTypeChange() {
-	alertBox($("#document-type").val());
+    var t = $("#document-type").val();
+    var fileRow = $("#filerow");
+    var linkRow = $("#linkrow");
+    if (t == 'File'){
+        fileRow.show();
+        linkRow.hide();
+    } else {
+        fileRow.hide();
+        linkRow.show();
+    }
 }
 
 function onEditDocumentShow(e) {
-	if (! e.view.params.documentId) {
-		//new document
-		$("#document-type").val("Link");
-	}
+    var title = "";
+    if (documentId == -1){
+        title = "New ";
+        $("#edit-document-open").hide();
+        onDocumentTypeChange();
+    } else {
+        title = "Edit ";
+        $("#edit-document-open").show();
+    }
+    
+    title += documentType;
+    $("#edit-document-navbar").data("kendoMobileNavBar").title(title);
+}
+
+function onEditDocumentBackClick(){
+    if (documentType == "Drawings"){
+        onBackClick("views/drawingslist.html");
+    } else {
+        onBackClick("views/workorderlist.html");
+    }
+}
+
+function onNewDrawings(){
+    documentId = -1;
+    documentType = 'Drawings';
+    App.getApp().navigate('views/editdocument.html');
+}
+
+function onNewWorkorder(){
+    documentId = -1;
+    documentType = 'Work Order';
+    App.getApp().navigate('views/editdocument.html');
 }

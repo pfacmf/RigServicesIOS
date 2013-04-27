@@ -5,11 +5,11 @@
 		<title></title>
 	</head>
 	<body>
-		<div data-role="view" id="editdocument" data-title="New Document type" data-layout="" data-show="onEditDocumentShow">
+		<div data-role="view" id="editdocument" data-layout="" data-show="onEditDocumentShow">
 			<header data-role="header">
-				<div data-role="navbar">
-					<a data-role="button" data-align="left" onclick="onBackClick('views/based on type.html')" data-icon="reply"></a>
-					<span data-role="view-title"></span>
+				<div id="edit-document-navbar" data-role="navbar">
+					<a data-role="button" data-align="left" onclick="onEditDocumentBackClick()" data-icon="reply"></a>
+					<span data-role="view-title">New Document</span>
 					<a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
 				</div>
 			</header>
@@ -21,25 +21,25 @@
 				</li>
 				<li>
 					Type
-					<select class="listviewinput" id="document-type" onchange="onDocumentTypeChange">
+					<select class="listviewinput" id="document-type" onchange="onDocumentTypeChange()">
 						<option value="File">File</option>
 						<option value="Link">Link</option>
 					</select>
 				</li>
-				<li>
+				<li id="filerow">
 					File*
 					<input class="listviewinput" type="file"/>
 				</li>
-				<li>
+				<li id="linkrow">
 					Info*
 					<input class="listviewinput" type="text" id="document-info" />
 				</li>
 			</ul>
 			<div style="width:100%; text-align:center">
 				<a data-role="button" class="bigbutton" data-click="saveDocument">Save</a>
-                <a data-role="button" class="bigbutton" data-click="openDocument">Open</a>
+                <a data-role="button" class="bigbutton" data-click="openDocument" id="edit-document-open">Open</a>
 			</div>
 		</div>
-		<script src="scripts/documentlist.js"></script>
+
 	</body>
 </html>

@@ -267,6 +267,8 @@ function alertBox(message, title, buttonText) {
 	}
 	$("#alert-message").text(message);
 	$("#alert-box").data("kendoMobileModalView").open();
+
+    //navigator.notification.alert(message, clickAlertButton, title, buttonText);
 }
 
 function clickAlertButton(e) {

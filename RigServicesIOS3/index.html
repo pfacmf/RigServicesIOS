@@ -117,8 +117,25 @@
 				#}#
 			</p>
 		</script>
+
 		<a id="loading-cancel" data-role="button" onclick="cancelLoader()">Cancel</a>
 
+		<!-- alert modalview -->
+		<div style="width:220px; height:235px" data-role="modalview" id="alert-box">
+			<div data-role="header">
+				<div id="alert-navbar" data-role="navbar">
+					<span>Alert</span>
+				</div>
+			</div>
+			<ul data-role="listview" data-style="inset">
+				<li>
+					<p id="alert-message">Alert</p><br/>
+				</li>
+			</ul>
+
+			<a id="alert-ok" data-click="clickAlertButton" type="button" data-role="button">OK</a>
+		</div>
+        
 		<div id="glass" class="glass" style="display: none;"></div>
 		<script>
 			App.setApp(new kendo.mobile.Application(document.body, { transition: "slide", initial: "login" }));

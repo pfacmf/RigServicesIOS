@@ -60,7 +60,7 @@ function onDeleteDocumentSuccess() {
 }
 
 function onDocumentTypeChange() {
-	alert($("#document-type").val());
+	alertBox($("#document-type").val());
 }
 
 function onEditDocumentShow(e) {

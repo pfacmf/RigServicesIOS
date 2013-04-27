@@ -20,7 +20,7 @@ function onDeviceReady() {
 }
 
 function showLoader(text, request, callback) {
-    $("#glass").show();
+	$("#glass").show();
 	loaderElement = App.getApp().pane.loader.element.find("h1");
 	if (text) {
 		loaderElement.text(text);
@@ -28,16 +28,15 @@ function showLoader(text, request, callback) {
 	else {
 		loaderElement.text('');
 	}
-    App.setLoaderCanceled(false);
+	App.setLoaderCanceled(false);
 	App.setLoaderCancelCallback(callback);
 	App.setRequest(request);
 	App.getApp().showLoading();
-	
 }
 
 function cancelLoader() {
 	App.setLoaderCanceled(true);
-    if (App.getLoaderCancelCallback()) {
+	if (App.getLoaderCancelCallback()) {
 		App.loaderCancelCallback();
 	}
 	if (App.getRequest()) {
@@ -46,7 +45,7 @@ function cancelLoader() {
 	hideLoader();
 }
 function hideLoader() {
-    $("#glass").hide();
+	$("#glass").hide();
 	App.getApp().hideLoading();    
 }
 
@@ -120,12 +119,12 @@ function login() {
 		deletePersistent('rememberMePassword');
 	}
 	if (username.length == 0) {
-		alert("Please provide an username");
+		alertBox("Please provide an username");
 		$("#username").focus();
 		return;
 	}
 	if (password.length == 0) {
-		alert("Please provide a password");
+		alertBox("Please provide a password");
 		$("#password").focus();
 		return;
 	}
@@ -139,28 +138,28 @@ function login() {
 function getRequestData(data, status) {
 	if (status == 'success') {
 		if (data.indexOf('Error:') == 0) {
-			alert(data);
+			alertBox(data);
 		}
 		else {
 			try {
 				return $.parseJSON(data);
 			}
 			catch (err) {
-				alert(err);
+				alertBox(err);
 			}
 		}   
 	}
 	else {
-		alert('Error during request');
+		alertBox('Error during request');
 	}
 	return null;
 }
 
 function onLoginDone(data, status) {
-    if (App.isLoaderCanceled()){
-        return;
-    }
-    hideLoader();
+	if (App.isLoaderCanceled()) {
+		return;
+	}
+	hideLoader();
 	var initialData = getRequestData(data, status);
 	if (initialData) {
 		App.setInitialData(initialData);
@@ -178,14 +177,14 @@ function onLoginDone(data, status) {
 
 function onRequestFail(jqxhr, textStatus, error) {
 	if (!App.isLoaderCanceled()) {
-		alert('Error making the request:\n' + error);
+		alertBox('Error making the request: ' + error);
 	}
 }
 
 function saveSettings() {
 	var url = $("#url").val().trim();
 	if (url.length == 0) {
-		alert('url is mandatory');
+		alertBox('url is mandatory');
 		return;
 	}
 	savePersistent('url', url);
@@ -234,7 +233,7 @@ function setRigTabsTitle() {
 		title = App.getRig().name;
 	}
 	else {
-		alert('Rig is unselected. Please select a rig');
+		alertBox('Rig is unselected. Please select a rig');
 		App.getApp().navigate('views/riglist.html');
 		return;
 	}
@@ -243,7 +242,7 @@ function setRigTabsTitle() {
 		$("#rig-tabs-navbar").data("kendoMobileNavBar").title(title);
 	}
 	else {
-		alert('Category was not selected. Please select a category');
+		alertBox('Category was not selected. Please select a category');
 		App.getApp().navigate('view/categorieslist.html');
 		return;
 	}
@@ -257,4 +256,19 @@ function onLogoutClick() {
 
 function onBackClick(navigateTo) {
 	App.getApp().navigate(navigateTo);
+}
+
+function alertBox(message, title, buttonText) {
+	if (title !== undefined) {
+		$("#alert-navbar").data("kendoMobileNavBar").title(title);
+	}
+	if (buttonText !== undefined) {
+		$("#alert-ok").text(buttonText);
+	}
+	$("#alert-message").text(message);
+	$("#alert-box").data("kendoMobileModalView").open();
+}
+
+function clickAlertButton(e) {
+	$("#alert-box").data("kendoMobileModalView").close();
 }

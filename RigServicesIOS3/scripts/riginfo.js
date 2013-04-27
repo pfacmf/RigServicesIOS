@@ -35,7 +35,7 @@ function onGetRigInfoSuccess(data, status) {
 function saveRig() {
 	var rigName = $("#rig-name").val().trim();
 	if (rigName.length == 0) {
-		alert("Rig name is mandatory");
+		alertBox("Rig name is mandatory");
 		return;
 	}
 	var rigInfo = $("#rig-info").val().trim();

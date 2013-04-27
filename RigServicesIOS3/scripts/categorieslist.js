@@ -7,7 +7,7 @@ function onCategoriesListShow(){
     if (App.getRig()){
         $("#categories-navbar").data("kendoMobileNavBar").title(App.getRig().name);
     } else {
-        alert('Rig was not selected. Please select a rig');
+        alertBox('Rig was not selected. Please select a rig');
         App.getApp().navigate('views/riglist.html');
     }
 }

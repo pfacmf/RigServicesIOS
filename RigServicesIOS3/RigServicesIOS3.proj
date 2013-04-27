@@ -96,6 +96,7 @@
     <Content Include="views\categorieslist.html" />
     <Content Include="views\crewlist.html" />
     <Content Include="views\drawingslist.html" />
+    <Content Include="views\editcrew.html" />
     <Content Include="views\editdocument.html" />
     <Content Include="views\editmaintenance.html" />
     <Content Include="views\editrig.html" />

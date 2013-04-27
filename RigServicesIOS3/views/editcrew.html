@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<div data-role="view" id="editcrew" data-layout="" data-show="onEditCrewShow">
+			<header data-role="header">
+				<div id="edit-crew-navbar" data-role="navbar">
+					<a data-role="button" data-align="left" onclick="onBackClick('views/crewlist.html')" data-icon="reply"></a>
+					<span data-role="view-title">New Crew</span>
+					<a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
+				</div>
+			</header>
+
+			<ul data-style="inset" class="maximal" data-layout="" data-role="listview">
+				<li>
+					Title
+					<input class="listviewseparaterow" placeholder="Title" id="crew-title" />
+				</li>
+				<li>
+					First Name*
+					<input class="listviewseparaterow" type="text" placeholder="First Name" id="crew-first-name" />
+				</li>
+				<li>
+					Middle Name
+					<input class="listviewseparaterow" type="text" placeholder="Middle Name" id="crew-middle-name"/>
+				</li>
+				<li>
+					Last Name*
+					<input class="listviewseparaterow" type="text" placeholder="Last Name" id="crew-last-name"/>
+				</li>
+				<li>
+					Company Info
+					<input class="listviewseparaterow" type="text" placeholder="Company" id="crew-company-info"/>
+				</li>
+				<li>
+					Email
+					<input class="listviewseparaterow" type="text" placeholder="Email" id="crew-email"/>
+				</li>
+				<li>
+					Work
+					<input class="listviewseparaterow" type="text" placeholder="Work Phone" id="crew-work"/>
+				</li>
+				<li>
+					Cell
+					<input class="listviewseparaterow" type="text" placeholder="Cell" id="crew-cell"/>
+				</li>
+				<li>
+					Fax
+					<input class="listviewseparaterow" type="text" placeholder="Fax" id="crew-fax"/>
+				</li>
+				<li>
+					Medical Info <textarea id="crew-medical-info" style="float:none; width:100%; height:7em; padding: 0px" placeholder="Medical Info"></textarea>
+				</li>
+                <li>
+                    <label>Enabled<input type="checkbox" id="crew-enabled" checked="checked"/></label>
+                </li>
+			</ul>
+			<div style="width:100%; text-align:center">
+				<a data-role="button" class="bigbutton" data-click="saveCrew">Save</a>
+			</div>
+		</div>
+
+	</body>
+</html>

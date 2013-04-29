@@ -205,7 +205,7 @@ function getURL() {
 		return url;
 	}
 	else {
-		return "http://rigservices:8080/";
+		return "http://rigservices.com:8080/";
         
 	}
 }

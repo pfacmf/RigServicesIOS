@@ -58,6 +58,7 @@ function onEditMaintenanceShow() {
 	if (maintenanceId == -1) {
 		resetForm();
         $("#edit-maintenance-navbar").data("kendoMobileNavBar").title("New Maintenance");
+        $("#activity-at").val(getFormattedDateTime(new Date()));
 	} else {
         $("#edit-maintenance-navbar").data("kendoMobileNavBar").title("Edit Maintenance");
         $("#activity-at").val(getFormattedDateTime(new Date(editedMaintenance.activityAt)));

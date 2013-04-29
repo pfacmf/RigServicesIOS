@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -27,17 +27,27 @@
 					</select>
 				</li>
 				<li id="filerow">
-					File*
-					<input class="listviewinput" type="file"/>
+					<table>
+						<tr>
+							<td>File*</td>
+							<td style="width:100%">
+								<input style="width:100%; position: relative; margin: 0px" type="text" id="file-name" />
+                                <input type="file" id="file" style="display:none;" onchange="fileSelected()" />
+							</td>
+							<td>
+								<a data-role="button" data-click="selectFile">Browse</a>
+							</td>
+						</tr>
+					</table>
 				</li>
 				<li id="linkrow">
 					Info*
-					<input class="listviewinput" type="text" id="document-info" />
+					<input class="listviewinput" type="text" id="document-info" placeholder="link"/>
 				</li>
 			</ul>
 			<div style="width:100%; text-align:center">
 				<a data-role="button" class="bigbutton" data-click="saveDocument">Save</a>
-                <a data-role="button" class="bigbutton" data-click="openDocument" id="edit-document-open">Open</a>
+				<a data-role="button" class="bigbutton" data-click="openDocument" id="edit-document-open">Open</a>
 			</div>
 		</div>
 

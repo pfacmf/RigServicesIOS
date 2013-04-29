@@ -22,7 +22,7 @@ function onGetDocumentListSuccess(data, status) {
 	if (App.isLoaderCanceled()) {
 		return;
 	}
-    hideLoader();
+	hideLoader();
 	var docList = getRequestData(data, status);
 	if (docList) {
 		$(documentListSelector).data("kendoMobileListView").setDataSource(new kendo.data.DataSource({data:docList}));
@@ -51,69 +51,143 @@ function deleteDocument(e) {
 	}
 }
 
-function editDocument(e){
-    documentId = e.context;
-    if ($("#drawings-list").length == 1 && App.getApp().view() == $("#drawings-list").data("kendoMobileView")){
-        documentType = 'Drawings';
-    } else {
-        documentType = 'Work Order';
-    }
-    App.getApp().navigate("views/editdocument.html");
+function editDocument(e) {
+	documentId = e.context;
+	if ($("#drawings-list").length == 1 && App.getApp().view() == $("#drawings-list").data("kendoMobileView")) {
+		documentType = 'Drawings';
+	}
+	else {
+		documentType = 'Work Order';
+	}
+	App.getApp().navigate("views/editdocument.html");
 }
 
 function onDeleteDocumentSuccess() {
 	if (App.isLoaderCanceled()) {
 		return;
 	}
-    hideLoader();
+	hideLoader();
 	onDocumentListShow(documentType, documentListSelector);
 	alert("Document was deleted");
 }
 
 function onDocumentTypeChange() {
-    var t = $("#document-type").val();
-    var fileRow = $("#filerow");
-    var linkRow = $("#linkrow");
-    if (t == 'File'){
-        fileRow.show();
-        linkRow.hide();
-    } else {
-        fileRow.hide();
-        linkRow.show();
-    }
+	var t = $("#document-type").val();
+	var fileRow = $("#filerow");
+	var linkRow = $("#linkrow");
+	if (t == 'File') {
+		fileRow.show();
+		linkRow.hide();
+	}
+	else {
+		fileRow.hide();
+		linkRow.show();
+	}
 }
 
 function onEditDocumentShow(e) {
-    var title = "";
-    if (documentId == -1){
-        title = "New ";
-        $("#edit-document-open").hide();
-        onDocumentTypeChange();
-    } else {
-        title = "Edit ";
-        $("#edit-document-open").show();
-    }
+	var title = "";
+	if (documentId == -1) {
+		title = "New ";
+		$("#edit-document-open").hide();
+		onDocumentTypeChange();
+	}
+	else {
+		title = "Edit ";
+		$("#edit-document-open").show();
+	}
     
-    title += documentType;
-    $("#edit-document-navbar").data("kendoMobileNavBar").title(title);
+	title += documentType;
+	$("#edit-document-navbar").data("kendoMobileNavBar").title(title);
 }
 
-function onEditDocumentBackClick(){
-    if (documentType == "Drawings"){
-        onBackClick("views/drawingslist.html");
-    } else {
-        onBackClick("views/workorderlist.html");
-    }
+function onEditDocumentBackClick() {
+	if (documentType == "Drawings") {
+		onBackClick("views/drawingslist.html");
+	}
+	else {
+		onBackClick("views/workorderlist.html");
+	}
 }
 
-function onNewDrawings(){
-    documentId = -1;
-    documentType = 'Drawings';
-    App.getApp().navigate('views/editdocument.html');
+function onNewDrawings() {
+	documentId = -1;
+	documentType = 'Drawings';
+	App.getApp().navigate('views/editdocument.html');
 }
 
-function onNewWorkorder(){
-    documentId = -1;
-    documentType = 'Work Order';
-    App.getApp().navigate('views/editdocument.html');
+function onNewWorkorder() {
+	documentId = -1;
+	documentType = 'Work Order';
+	App.getApp().navigate('views/editdocument.html');
+}
+
+function selectFile() {
+	$("#file").click();
+}
+
+function fileSelected() {
+	$("#file-name").val($("#file").val());
+}
+
+function saveDocument() {
+	var name = $("#document-name").val().trim();
+	if (name.length == 0) {
+		alertBox("Name is mandatory");
+		return;
+	}
+	var type = $("#document-type").val().trim();
+    
+	params = {};
+	params.name = name;
+	params.type = type;
+	params.projectId = App.getRig().id;
+	params.accountId = App.getInitialData().currentUser.accountId;
+	var documentCategories = App.getInitialData().documentCategories;
+	for (var i = 0; i < documentCategories.length; i++) {
+		if (documentCategories[i].text == documentType) {
+			params.categoryId = documentCategories[i].value;
+			break;
+		}      
+	}
+	if (App.getCategory() == 'Rig') {
+		params.linkableId = App.getRig().id;
+		params.modelNumber = "";
+		params.linkableType = "Project";
+	}
+	else {
+		params.linkableId = "";
+		params.modelNumber = App.getCategory();
+		params.linkableType = "ItemModel";
+	}
+	if (type == 'File') {
+		//upload file    
+		var filePath = $("#file-name").val().trim();
+		if (filePath.length == 0) {
+			alertBox("File is mandatory");
+			return;
+		}
+		var ft = new FileTransfer();
+        var options = new FileUploadOptions();
+        options.params = params;
+		var url = getURL() + "UploadDocumentServlet";
+        ft.upload(filePath, encodeURI(url), onDocumentUploadSuccess, onDocumentUploadSuccessError, options);
+	}
+	else {
+		//post link
+		var info = $("#document-info").val.trim();
+		if (info.length == 0) {
+			alertBox("Info is mandatory");
+			return;
+		}
+		params.info = info;
+	}
+}
+
+function onDocumentUploadSuccess() {
+	alert("done");
+}
+
+function onDocumentUploadError() {
+	alert("error");
 }

@@ -40,19 +40,19 @@ function onWorkOrderClick(e) {
 	onDocumentClick(e);
 }
 function onDocumentClick(e) {
-	$("#document-menu").data("kendoMobileActionSheet").open(e.item, e.dataItem.id);
+	$("#document-menu").data("kendoMobileActionSheet").open(e.item, e.dataItem);
 }
 
 function deleteDocument(e) {
 	if (confirm("Are you sure you want to delete the document?")) {
 		var url = getRequestURL('deletedocument');
-		url += "&" + $.param({documentId: e.context});
+		url += "&" + $.param({documentId: e.context.id});
 		showLoader("Deleting document", $.get(url, onDeleteDocumentSuccess).fail(onRequestFail));
 	}
 }
 
 function editDocument(e) {
-	documentId = e.context;
+	documentId = e.context.id;
 	if ($("#drawings-list").length == 1 && App.getApp().view() == $("#drawings-list").data("kendoMobileView")) {
 		documentType = 'Drawings';
 	}
@@ -62,6 +62,31 @@ function editDocument(e) {
 	App.getApp().navigate("views/editdocument.html");
 }
 
+function openDocument(e) {
+	if (e.context.type == 'Link') {
+		var url = e.context.info;
+		if (url.indexOf('http') != 0) {
+			url = 'http://' + url;
+		}
+		$("#document-menu").data('kendoMobileActionSheet').close();
+		window.open(e.context.info, '_blank');
+	}
+	else {
+		if (e.context.fileSize < 1024 * 1024 * 25) {
+			//open in browser
+			var url = "https://docs.google.com/viewer?embedded=true&url=";
+			var ourUrl = getURL();
+			ourUrl += "Download?id=" + e.context.id;
+			ourUrl += "&accountId=" + App.getInitialData().currentUser.accountId;
+			ourUrl += "&type=1";
+            url += escape(ourUrl).replace(/\//gi,"%2F");
+            window.open(url, '_blank');
+		}
+		else {
+			alertBox("The file is too large to open with google docs");
+		}
+	}
+}
 function onDeleteDocumentSuccess() {
 	if (App.isLoaderCanceled()) {
 		return;
@@ -168,10 +193,10 @@ function saveDocument() {
 			return;
 		}
 		var ft = new FileTransfer();
-        var options = new FileUploadOptions();
-        options.params = params;
+		var options = new FileUploadOptions();
+		options.params = params;
 		var url = getURL() + "UploadDocumentServlet";
-        ft.upload(filePath, encodeURI(url), onDocumentUploadSuccess, onDocumentUploadSuccessError, options);
+		ft.upload(filePath, encodeURI(url), onDocumentUploadSuccess, onDocumentUploadSuccessError, options);
 	}
 	else {
 		//post link

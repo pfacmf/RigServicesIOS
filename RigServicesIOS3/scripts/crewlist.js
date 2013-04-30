@@ -134,3 +134,7 @@ function onSaveCrewSuccess() {
 	App.getApp().navigate("views/crewlist.html");
 	alert("Crew was saved");
 }
+
+function onEditCrewBack(){
+    App.getApp().navigate('views/crewlist.html');
+}

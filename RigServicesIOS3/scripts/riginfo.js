@@ -57,3 +57,7 @@ function onEditRigShow() {
 	$("#rig-name").val('');
 	$("#rig-info").val('');
 }
+
+function onEditRigBack(){
+    App.getApp().navigate('views/riglist.html');
+}

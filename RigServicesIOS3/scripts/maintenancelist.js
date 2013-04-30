@@ -101,3 +101,7 @@ function onDeleteMaintenanceSuccess() {
 	onMaintenanceListShow();
 	alert("Maintenance was deleted");
 }
+
+function onEditMaintananceBack(){
+    App.getApp().navigate('views/maintenancelist.html');
+}

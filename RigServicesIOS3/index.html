@@ -86,7 +86,7 @@
 		<div data-role="layout" data-id="rigtabs-layout">
 			<header data-role="header" >
 				<div data-role="navbar" id="rig-tabs-navbar">
-					<a data-role="button" data-align="left" onclick="onBackClick('views/categorieslist.html')" data-icon="reply"></a>
+					<a data-role="button" data-align="left" data-click="onTabsBack" data-icon="reply"></a>
 					<span data-role="view-title"></span>
 					<a data-role="button" data-align="right" data-click="onLogoutClick" data-icon="home"></a>
 				</div>
@@ -139,7 +139,7 @@
 			</p>
 		</script>
 
-		<a id="loading-cancel" data-role="button" onclick="cancelLoader()">Cancel</a>
+		<a id="loading-cancel" data-role="button" data-click="cancelLoader">Cancel</a>
 
 		<!-- alert modalview -->
 		<div style="width:220px; height:235px" data-role="modalview" id="alert-box">

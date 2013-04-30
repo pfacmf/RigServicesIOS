@@ -76,3 +76,11 @@ function getFormattedDate(dateParam) {
     
 	return curr_month + "/" + curr_date + "/" + curr_year;
 }
+
+function onEditSettingsBack(){
+    App.getApp().navigate('#login');
+}
+
+function onTabsBack(){
+    App.getApp().navigate('views/categorieslist.html');
+}

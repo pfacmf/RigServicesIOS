@@ -16,3 +16,7 @@ function onCategoriesListClick(e){
     App.setCategory(e.item.text());
     App.getApp().navigate('views/riginfo.html');
 }
+
+function onCategoriesBack(){
+    App.getApp().navigate('views/riglist.html');
+}

@@ -29,6 +29,12 @@ function saveMaintenance() {
 		alertBox("Activity at is mandatory");
 		return;
 	}
+    var parsedActivityAt = new Date(activityAt);
+
+    if (parsedActivityAt == "Invalid Date"){
+        alertBox("Invalid Date");
+        return;
+    }
 	if (performedBy.length == 0) {
 		alertBox("Performed by mandatory");
 		return;
@@ -37,7 +43,7 @@ function saveMaintenance() {
 	var url = getRequestURL('saveactivity');
 	url += "&" + $.param({
 		maintenanceid: maintenanceId,
-		activityat:activityAt, 
+		activityat:getFormattedDateTime(parsedActivityAt), 
 		performedby: performedBy,
 		performingcompany: $("#activity-performing-company").val(),
 		details: $("#activity-details").val()
@@ -58,10 +64,10 @@ function onEditMaintenanceShow() {
 	if (maintenanceId == -1) {
 		resetForm();
         $("#edit-maintenance-navbar").data("kendoMobileNavBar").title("New Maintenance");
-        $("#activity-at").val(getFormattedDateTime(new Date()));
+        $("#activity-at").val(getStandardFormattedDateTime(new Date()));
 	} else {
         $("#edit-maintenance-navbar").data("kendoMobileNavBar").title("Edit Maintenance");
-        $("#activity-at").val(getFormattedDateTime(new Date(editedMaintenance.activityAt)));
+        $("#activity-at").val(getStandardFormattedDateTime(new Date(editedMaintenance.activityAt)));
         $("#activity-performing-company").val(editedMaintenance.performingCompanyName);
         $("#activity-performed-by").val(editedMaintenance.performedBy);
         $("#activity-details").val(editedMaintenance.details);

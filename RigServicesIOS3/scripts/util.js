@@ -61,6 +61,35 @@ function getFormattedDateTime(d) {
 	return curr_month + "/" + curr_date + "/" + curr_year + " " + hour + ":" + min + ":" + sec/* + " " + meridian*/;
 }
 
+function getStandardFormattedDateTime(d) {
+	var curr_date = d.getDate();
+    if (curr_date < 10){
+        curr_date = '0' + curr_date;
+    }
+	var curr_month = d.getMonth();
+	curr_month++;
+    if (curr_month < 10){
+        curr_month = '0' + curr_month;
+    }
+	var curr_year = d.getFullYear();
+    
+	var hour = d.getHours() /*% 12*/;
+    if (hour < 10){
+        hour = '0' + hour;
+    }
+	var min = d.getMinutes();
+    if (min < 10){
+        min = '0' + min;
+    }
+	var sec = d.getSeconds();
+    /*
+	var meridian = 'AM';
+	if (d.getHours() >= 12)
+		meridian = 'PM';
+    */
+	return curr_year + "-" + curr_month + "-" + curr_date + "T" + hour + ":" + min /*+ ":" + sec + " " + meridian*/;
+}
+
 function getFormattedDate(dateParam) {
     var d;
     if (typeof dateParam === "Date"){
